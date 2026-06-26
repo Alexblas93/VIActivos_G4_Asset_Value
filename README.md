@@ -1,0 +1,1 @@
+# VIActivos_G4_Asset_Value
