@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Informe de Valoración – Carretas 6 + Paz 5 | G4 Asset Value</title>
+<style>
+  :root{
+    --azul:#25408F;
+    --azul2:#1a2f6b;
+    --verde:#498F37;
+    --naranja:#E8963E;
+    --gris:#4A4A4D;
+    --bg:#f4f6fa;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif;}
+  body{background:var(--bg);color:#222;display:flex;min-height:100vh;}
+  aside{
+    width:240px;background:var(--azul);color:#fff;padding:25px 15px;
+    position:fixed;height:100vh;overflow-y:auto;
+  }
+  aside .logos{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:25px;text-align:center;}
+  aside .logo-text{color:#fff;font-size:17px;font-weight:700;letter-spacing:1px;}
+  aside .logo-text small{display:block;font-size:9px;font-weight:400;opacity:.7;letter-spacing:2px;margin-top:3px;}
+  aside .logo-rics{background:#fff;color:var(--azul);padding:4px 12px;border-radius:6px;font-weight:bold;font-size:13px;letter-spacing:1px;}
+  aside h2{font-size:14px;text-transform:uppercase;margin:15px 0 8px;opacity:.7;letter-spacing:1px;}
+  aside ul{list-style:none;}
+  aside li{padding:9px 10px;border-radius:6px;cursor:pointer;font-size:13.5px;margin-bottom:3px;transition:.2s;border-left:3px solid transparent;}
+  aside li:hover{background:rgba(255,255,255,.1);}
+  aside li.active{background:rgba(255,255,255,.15);border-left:3px solid var(--naranja);font-weight:600;}
+  main{margin-left:240px;flex:1;padding:40px 50px;}
+  .slide{display:none;animation:fade .3s ease;}
+  .slide.active{display:block;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .slide-header{border-bottom:3px solid var(--azul);padding-bottom:14px;margin-bottom:25px;}
+  .slide-header h1{color:var(--azul);font-size:28px;font-weight:700;}
+  .slide-header p{color:var(--gris);font-size:14px;margin-top:4px;}
+  .grid{display:grid;gap:18px;}
+  .grid-2{grid-template-columns:1fr 1fr;}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-4{grid-template-columns:repeat(4,1fr);}
+  .card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-top:4px solid var(--azul);}
+  .card.green{border-top-color:var(--verde);}
+  .card.orange{border-top-color:var(--naranja);}
+  .card h3{color:var(--azul);font-size:16px;margin-bottom:10px;}
+  .card.green h3{color:var(--verde);}
+  .card.orange h3{color:var(--naranja);}
+  .card ul{list-style:none;font-size:13.5px;line-height:1.7;}
+  .card ul li:before{content:"▸ ";color:var(--azul);font-weight:bold;}
+  .card.green ul li:before{color:var(--verde);}
+  .card.orange ul li:before{color:var(--naranja);}
+  .kpi{background:#fff;border-radius:10px;padding:18px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+  .kpi .label{font-size:12px;color:var(--gris);text-transform:uppercase;letter-spacing:1px;}
+  .kpi .value{font-size:22px;color:var(--azul);font-weight:700;margin-top:5px;}
+  .kpi.big .value{font-size:34px;}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);font-size:13.5px;}
+  th{background:var(--azul);color:#fff;padding:11px;text-align:left;font-weight:600;}
+  td{padding:10px 11px;border-bottom:1px solid #eee;}
+  tr:last-child td{border-bottom:none;}
+  tr.total td{background:#f4f6fa;font-weight:700;color:var(--azul);}
+  tr.hl td{background:#e8f0e0;font-weight:600;}
+  .check{display:flex;align-items:flex-start;gap:10px;padding:9px 13px;background:#fff;border-radius:6px;margin-bottom:7px;font-size:13.5px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .check .tick{color:var(--verde);font-weight:bold;font-size:16px;}
+  .steps{display:flex;justify-content:space-between;gap:15px;margin:20px 0;}
+  .step{flex:1;background:#fff;border-radius:10px;padding:20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative;}
+  .step .num{width:40px;height:40px;border-radius:50%;background:var(--azul);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px;margin:0 auto 10px;}
+  .step.s2 .num{background:var(--verde);}
+  .step.s3 .num{background:var(--naranja);}
+  .step h4{color:var(--azul);font-size:15px;margin-bottom:6px;}
+  .step.s2 h4{color:var(--verde);}
+  .step.s3 h4{color:var(--naranja);}
+  .step p{font-size:13px;color:var(--gris);}
+  .footer-nav{display:flex;justify-content:space-between;margin-top:35px;}
+  .btn{background:var(--azul);color:#fff;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:14px;}
+  .btn:hover{background:var(--azul2);}
+  .btn:disabled{opacity:.4;cursor:not-allowed;}
+  .badge{display:inline-block;background:var(--verde);color:#fff;padding:3px 9px;border-radius:10px;font-size:11px;font-weight:600;margin-left:6px;}
+  .badge.org{background:var(--naranja);}
+  .highlight{background:linear-gradient(90deg,var(--azul) 0%,var(--azul2) 100%);color:#fff;padding:25px;border-radius:10px;text-align:center;margin:20px 0;}
+  .highlight.green-bg{background:linear-gradient(90deg,var(--verde) 0%,#3a7028 100%);}
+  .highlight .v{font-size:42px;font-weight:700;margin:8px 0;}
+  .note{background:#fff8e6;border-left:4px solid var(--naranja);padding:13px 15px;border-radius:5px;font-size:13.5px;margin-top:15px;}
+</style>
+</head>
+<body>
+<aside>
+  <div class="logos">
+    <div class="logo-text">G4 ASSET VALUE<small>VALUATION &amp; CONSULTING</small></div>
+    <div class="logo-rics">◆ RICS</div>
+  </div>
+  <h2>Secciones</h2>
+  <ul id="nav">
+    <li data-i="0" class="active">Portada</li>
+    <li data-i="1">Resumen Ejecutivo</li>
+    <li data-i="2">El Activo</li>
+    <li data-i="3">Localización</li>
+    <li data-i="4">Superficies</li>
+    <li data-i="5">Urbanismo</li>
+    <li data-i="6">Bases &amp; Hipótesis</li>
+    <li data-i="7">Metodología</li>
+    <li data-i="8">Mercado Retail</li>
+    <li data-i="9">Mercado Hotelero</li>
+    <li data-i="10">Mercado Apt. Turísticos</li>
+    <li data-i="11">14.1 Uso Comercial</li>
+    <li data-i="12">14.2 Hotel + Local</li>
+    <li data-i="13">14.3 Apt. + Local</li>
+    <li data-i="14">Comparativa</li>
+    <li data-i="15">Sensibilidad</li>
+    <li data-i="16">ESG &amp; Riesgos</li>
+    <li data-i="17">Conclusión</li>
+  </ul>
+</aside>
+<main>
+
+<!-- 0 Portada -->
+<section class="slide active">
+  <div style="background:linear-gradient(135deg,var(--azul) 0%,var(--azul2) 100%);color:#fff;padding:80px 50px;border-radius:14px;text-align:center;">
+    <div style="font-size:14px;letter-spacing:3px;opacity:.85;">INFORME DE VALORACIÓN RICS</div>
+    <h1 style="font-size:38px;margin:18px 0 10px;">Edificio Comercial<br>Calle Carretas 6 + Local Calle Paz 5</h1>
+    <p style="font-size:18px;opacity:.9;">Madrid · España</p>
+    <div style="margin-top:40px;display:flex;justify-content:center;gap:60px;flex-wrap:wrap;">
+      <div><div style="font-size:11px;opacity:.7;letter-spacing:1px;">PREPARADO PARA</div><div style="font-weight:600;margin-top:4px;">Mutualidad General de la Abogacía</div></div>
+      <div><div style="font-size:11px;opacity:.7;letter-spacing:1px;">FECHA VALORACIÓN</div><div style="font-weight:600;margin-top:4px;">11 junio 2026</div></div>
+      <div><div style="font-size:11px;opacity:.7;letter-spacing:1px;">Nº VALORACIÓN</div><div style="font-weight:600;margin-top:4px;">2026/0346</div></div>
+    </div>
+    <div style="margin-top:35px;padding-top:25px;border-top:1px solid rgba(255,255,255,.2);font-size:13px;opacity:.85;">Silvia Bermejo MRICS RV nº 33988665 · G4 Asset Value</div>
+  </div>
+</section>
+
+<!-- 1 Resumen Ejecutivo -->
+<section class="slide">
+  <div class="slide-header"><h1>Resumen Ejecutivo</h1><p>Aspectos clave del encargo</p></div>
+  <div class="highlight green-bg">
+    <div style="font-size:12px;opacity:.9;letter-spacing:2px;">VALOR DE MERCADO ADOPTADO – 11/06/2026</div>
+    <div class="v">26.633.000 €</div>
+    <div style="font-size:13px;opacity:.9;">Bajo hipótesis especial: Apartamentos Turísticos + Local Comercial</div>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Encargo</h3>
+      <ul>
+        <li><b>Cliente:</b> Mutualidad General de la Abogacía</li>
+        <li><b>Solicitante:</b> Carlos Pérez-Baz · Director Inversiones</li>
+        <li><b>Finalidad:</b> Posible operación de venta</li>
+        <li><b>Base de valor:</b> Valor de Mercado (RICS Red Book / IVS)</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h3>Equipo Valorador</h3>
+      <ul>
+        <li><b>Silvia Bermejo</b> MRICS RV nº 33988665</li>
+        <li>Eliana Godoy MRICS</li>
+        <li>Alberto Casielles MRICS</li>
+        <li>Alejandro de Blas MRICS</li>
+        <li>Valorador externo independiente</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card orange" style="margin-top:18px;">
+    <h3>Principales Riesgos e Incertidumbres</h3>
+    <ul>
+      <li>Viabilidad técnica, urbanística y administrativa de la transformación</li>
+      <li>Obtención de licencias (protección patrimonial, ZBE Distrito Centro)</li>
+      <li>Evolución de los mercados de explotación hotelero y turístico</li>
+      <li>Estimación de los costes de reforma y reposicionamiento</li>
+      <li>Transmisión conjunta de ambas fincas registrales</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 2 El Activo -->
+<section class="slide">
+  <div class="slide-header"><h1>El Activo</h1><p>Identificación del inmueble objeto de valoración</p></div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>C6 – Calle Carretas, 6</h3>
+      <ul>
+        <li>Finca Registral <b>136</b></li>
+        <li>Superficie: <b>2.617 m²</b></li>
+        <li>Edificio completo entre medianeras</li>
+        <li>Sótano + PB + 4 plantas + casetón</li>
+        <li>Fachada a C/ Carretas y C/ Paz</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h3>P5 – Calle de la Paz, 5</h3>
+      <ul>
+        <li>Finca Registral <b>44388</b></li>
+        <li>Superficie: <b>176 m²</b></li>
+        <li>Local en PB (101 m²) + Sótano (75 m²)</li>
+        <li>Unido físicamente a Carretas 6</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid grid-4" style="margin-top:18px;">
+    <div class="kpi"><div class="label">Sup. Registral</div><div class="value">2.718 m²</div></div>
+    <div class="kpi"><div class="label">Ref. Catastral</div><div class="value" style="font-size:13px;">0443102VK4704C0001IX</div></div>
+    <div class="kpi"><div class="label">Año Constr.</div><div class="value">1988</div></div>
+    <div class="kpi"><div class="label">Estado</div><div class="value" style="font-size:18px;">Vacío</div></div>
+  </div>
+</section>
+
+<!-- 3 Localización -->
+<section class="slide">
+  <div class="slide-header"><h1>Localización y Entorno</h1><p>Centro de Madrid · Entorno Puerta del Sol</p></div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Posicionamiento Prime</h3>
+      <ul>
+        <li>Distrito Centro · junto a Puerta del Sol</li>
+        <li>Eje "high street": Gran Vía – Preciados – Sol</li>
+        <li>Madrid: 3,5 M hab. · 11 M turistas/año</li>
+        <li>Elevada afluencia peatonal y atractivo turístico</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h3>Accesibilidad Multimodal</h3>
+      <ul>
+        <li><b>Metro Sol:</b> Líneas 1, 2 y 3</li>
+        <li><b>Cercanías:</b> C-3 y C-4</li>
+        <li><b>Autobuses:</b> múltiples líneas urbanas</li>
+        <li><b>Aeropuerto Barajas:</b> 30-35 min Metro · 20 min taxi</li>
+        <li><b>Radiales nacionales:</b> Km. 0 (A1–A6)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4 Superficies -->
+<section class="slide">
+  <div class="slide-header"><h1>Cuadro de Superficies</h1><p>Distribución funcional del activo</p></div>
+  <div class="grid grid-2">
+    <div>
+      <h3 style="color:var(--azul);margin-bottom:10px;">Carretas 6</h3>
+      <table>
+        <tr><th>Planta</th><th>Uso</th><th style="text-align:right;">m²</th></tr>
+        <tr><td>Sótano -1</td><td>Instalaciones</td><td style="text-align:right;">492,00</td></tr>
+        <tr><td>Baja</td><td>Comercial</td><td style="text-align:right;">420,00</td></tr>
+        <tr><td>Primera</td><td>Comercial</td><td style="text-align:right;">420,00</td></tr>
+        <tr><td>Segunda</td><td>Comercial</td><td style="text-align:right;">420,00</td></tr>
+        <tr><td>Tercera</td><td>Comercial</td><td style="text-align:right;">420,00</td></tr>
+        <tr><td>Cuarta</td><td>Almacén</td><td style="text-align:right;">402,00</td></tr>
+        <tr><td>Casetón</td><td>Instalaciones</td><td style="text-align:right;">43,00</td></tr>
+        <tr class="total"><td colspan="2">Total</td><td style="text-align:right;">2.617,00</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3 style="color:var(--verde);margin-bottom:10px;">Paz 5</h3>
+      <table>
+        <tr><th>Planta</th><th>Uso</th><th style="text-align:right;">m²</th></tr>
+        <tr><td>Sótano -1</td><td>Instalaciones</td><td style="text-align:right;">75,00</td></tr>
+        <tr><td>Baja</td><td>Comercial</td><td style="text-align:right;">101,00</td></tr>
+        <tr class="total"><td colspan="2">Total</td><td style="text-align:right;">176,00</td></tr>
+      </table>
+      <div class="highlight" style="margin-top:18px;padding:18px;">
+        <div style="font-size:13px;opacity:.8;">SUPERFICIE ADOPTADA</div>
+        <div class="v" style="font-size:32px;">2.718,00 m²</div>
+        <div style="font-size:12px;opacity:.8;">Superficie registral conjunta</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 Urbanismo -->
+<section class="slide">
+  <div class="slide-header"><h1>Situación Urbanística</h1><p>PGOUM Madrid · Zona 1 Casco Histórico</p></div>
+  <div class="grid grid-3">
+    <div class="card"><h3>Clasificación</h3><ul><li>Suelo urbano consolidado</li><li>Distrito Centro</li><li>PGOUM 1997 vigente</li></ul></div>
+    <div class="card"><h3>Calificación</h3><ul><li>Zona 1 – Casco Histórico</li><li>Manzana cerrada alineada a vial</li><li>Terciario + residencial</li></ul></div>
+    <div class="card"><h3>Ordenación</h3><ul><li>Conservación alineaciones y rasantes</li><li>Parcelario histórico</li><li>Licencia urbanística obligatoria</li></ul></div>
+    <div class="card orange"><h3>Edificabilidad</h3><ul><li>Situación consolidada</li><li>Sin incrementos significativos</li><li>Reforma / rehabilitación viables</li></ul></div>
+    <div class="card green"><h3>Usos Compatibles</h3><ul><li>Terciario / comercial</li><li>Oficinas / dotacional</li><li>Hospedaje (condicionado)</li></ul></div>
+    <div class="card orange"><h3>Limitaciones</h3><ul><li>Catálogo Elementos Protegidos</li><li>ZBE Distrito Centro</li><li>Plan Especial Hospedaje</li></ul></div>
+  </div>
+</section>
+
+<!-- 6 Bases & Hipótesis -->
+<section class="slide">
+  <div class="slide-header"><h1>Bases de Valor e Hipótesis</h1></div>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Uso Actual</h4><p>Comercial – Estado "as is"</p></div>
+    <div class="step s2"><div class="num">2</div><h4>HE: Hotel + Local</h4><p>Mixto Hotelero + Comercial</p></div>
+    <div class="step s3"><div class="num">3</div><h4>HE: Apt. + Local</h4><p>Apartamentos Turísticos + Comercial</p></div>
+  </div>
+  <div class="grid grid-2" style="margin-top:18px;">
+    <div class="card">
+      <h3>Hipótesis Generales</h3>
+      <div class="check"><span class="tick">✓</span>Cumplimiento normativa urbanística vigente</div>
+      <div class="check"><span class="tick">✓</span>Sin cargas ocultas ni contaminación</div>
+      <div class="check"><span class="tick">✓</span>Estructura en condiciones adecuadas</div>
+      <div class="check"><span class="tick">✓</span>Superficies facilitadas correctas</div>
+      <div class="check"><span class="tick">✓</span>Inmueble vacío y libre de ocupantes</div>
+      <div class="check"><span class="tick">✓</span>Certificación BREEAM</div>
+    </div>
+    <div class="card orange">
+      <h3>Hipótesis Especiales</h3>
+      <div class="check"><span class="tick" style="color:var(--naranja);">★</span>Rehabilitación y cambio de uso a Hotel + Comercial</div>
+      <div class="check"><span class="tick" style="color:var(--naranja);">★</span>Rehabilitación y cambio de uso a Apartamentos Turísticos + Comercial</div>
+      <div class="check"><span class="tick" style="color:var(--naranja);">★</span>Transmisión conjunta como única unidad económica</div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 Metodología -->
+<section class="slide">
+  <div class="slide-header"><h1>Metodología y Enfoque</h1><p>RICS Red Book · IVS 2025</p></div>
+  <div class="highlight" style="margin-bottom:20px;">
+    <div style="font-size:13px;opacity:.8;letter-spacing:2px;">ENFOQUE PRINCIPAL</div>
+    <div style="font-size:26px;font-weight:700;margin:8px 0;">ENFOQUE DE RENTAS (DCF)</div>
+    <div style="font-size:13px;opacity:.8;">Apoyado en Método de Comparación (Market Approach Support)</div>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Proyección Flujos</h4><p>Ingresos por renta, gastos OpEx, CapEx</p></div>
+    <div class="step s2"><div class="num">2</div><h4>Valor Terminal</h4><p>Capitalización NOI estabilizado (exit yield)</p></div>
+    <div class="step s3"><div class="num">3</div><h4>Descuento</h4><p>Tasa coherente con perfil de riesgo</p></div>
+  </div>
+  <div class="card" style="margin-top:18px;">
+    <h3>Periodo de Análisis</h3>
+    <ul>
+      <li>Uso comercial actual: <b>10 años</b></li>
+      <li>Hotel + Local: <b>13 años</b> (3 desarrollo + 10 explotación)</li>
+      <li>Apartamentos + Local: <b>12 años</b> (2 desarrollo + 10 explotación)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8 Mercado Retail -->
+<section class="slide">
+  <div class="slide-header"><h1>Mercado Retail – High Street Madrid</h1></div>
+  <div class="grid grid-4" style="margin-bottom:18px;">
+    <div class="kpi"><div class="label">Disponibilidad Prime</div><div class="value">~3,5%</div></div>
+    <div class="kpi"><div class="label">Crec. Rentas Anual</div><div class="value">3–4%</div></div>
+    <div class="kpi"><div class="label">Renta Prime Sol</div><div class="value" style="font-size:15px;">245–260 €/m²/mes</div></div>
+    <div class="kpi"><div class="label">Renta Carretas</div><div class="value" style="font-size:15px;">60–80 €/m²/mes</div></div>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Contexto</h3>
+      <ul>
+        <li>Eje "high street" Gran Vía – Preciados – Sol</li>
+        <li>Mercado maduro, líquido y consolidado</li>
+        <li>Demanda sostenida · oferta limitada</li>
+        <li>Calle Carretas en eje high street prime</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h3>Renta Adoptada</h3>
+      <div class="highlight" style="margin:5px 0;padding:18px;">
+        <div style="font-size:12px;opacity:.85;">RENTA HOMOGENEIZADA CRUJÍA FACHADA</div>
+        <div class="v" style="font-size:30px;">72 €/m²/mes</div>
+      </div>
+      <p style="font-size:13px;color:var(--gris);">Renta ponderada activo: 29,74 €/m²/mes (coef. 0,413)</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 Mercado Hotelero -->
+<section class="slide">
+  <div class="slide-header"><h1>Mercado Hotelero – Madrid 4★</h1></div>
+  <div class="grid grid-4" style="margin-bottom:18px;">
+    <div class="kpi"><div class="label">Ocupación 4★</div><div class="value">76–77%</div></div>
+    <div class="kpi"><div class="label">Ocup. Estabilizada</div><div class="value">85–90%</div></div>
+    <div class="kpi"><div class="label">Ocup. Inicial</div><div class="value">65%</div></div>
+    <div class="kpi"><div class="label">ADR Adoptado</div><div class="value">250 €</div></div>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Fundamentales</h3>
+      <ul>
+        <li>Mercado en fase de consolidación</li>
+        <li>Demanda internacional resiliente</li>
+        <li>Oferta en expansión moderada</li>
+        <li>Microlocalización Puerta del Sol prime</li>
+      </ul>
+    </div>
+    <div class="card orange">
+      <h3>Configuración Proyecto Hotel</h3>
+      <ul>
+        <li>41 habitaciones · 2.357 m²</li>
+        <li>33 doble estándar + 4 junior suite</li>
+        <li>3 doble con terraza + 1 junior suite terraza</li>
+        <li>Local comercial PB: 361 m²</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10 Mercado Apartamentos -->
+<section class="slide">
+  <div class="slide-header"><h1>Mercado Apartamentos Turísticos</h1></div>
+  <div class="grid grid-4" style="margin-bottom:18px;">
+    <div class="kpi"><div class="label">Ocup. Estabilizada</div><div class="value">88–90%</div></div>
+    <div class="kpi"><div class="label">Ocup. Inicial</div><div class="value">65%</div></div>
+    <div class="kpi"><div class="label">ADR Estudio</div><div class="value">183 €</div></div>
+    <div class="kpi"><div class="label">ADR 1 Dorm.</div><div class="value">280 €</div></div>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Contexto</h3>
+      <ul>
+        <li>Mercado en fase de madurez progresiva</li>
+        <li>Madrid: destino city break consolidado</li>
+        <li>Demanda internacional creciente</li>
+        <li>Riesgo regulatorio a vigilar</li>
+      </ul>
+    </div>
+    <div class="card orange">
+      <h3>Configuración Proyecto Apartamentos</h3>
+      <ul>
+        <li>31 apartamentos · 2.357 m²</li>
+        <li>13 estudios + 4 estudios con terraza</li>
+        <li>14 apartamentos 1 dormitorio</li>
+        <li>Local comercial PB: 462 m²</li>
+        <li>ADR medio ponderado: <b>233 €/día</b></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 11 14.1 Uso Comercial -->
+<section class="slide">
+  <div class="slide-header"><h1>14.1 Valor de Mercado – Uso Comercial Actual</h1><p>Escenario base · Estado "as is"</p></div>
+  <div class="grid grid-4" style="margin-bottom:18px;">
+    <div class="kpi"><div class="label">SBA</div><div class="value">2.595 m²</div></div>
+    <div class="kpi"><div class="label">Renta Anual</div><div class="value" style="font-size:17px;">925.956 €</div></div>
+    <div class="kpi"><div class="label">Tasa Descuento</div><div class="value">6,35%</div></div>
+    <div class="kpi"><div class="label">Exit Yield</div><div class="value">4,00%</div></div>
+  </div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Parámetros Clave</h3>
+      <ul>
+        <li>Renta unitaria: 29,74 €/m²/mes</li>
+        <li>Renta mensual: 77.163 €/mes</li>
+        <li>Indexación: IPC (3,6% → 2% estabilizado)</li>
+        <li>Único arrendatario · sin vacancia</li>
+        <li>CapEx terminal: 66.000 € (año 10)</li>
+        <li>Valor terminal: 25.598.350 €</li>
+      </ul>
+    </div>
+    <div class="highlight">
+      <div style="font-size:13px;opacity:.85;letter-spacing:2px;">VALOR DE MERCADO</div>
+      <div class="v">20.418.000 €</div>
+      <div style="font-size:12px;opacity:.85;">7.514 €/m² · Yield bruta 3,90%</div>
+    </div>
+  </div>
+  <div class="note">Sensibilidad: rango 18,16 M€ – 23,32 M€ (±50 pb yield × tasa)</div>
+</section>
+
+<!-- 12 14.2 Hotel -->
+<section class="slide">
+  <div class="slide-header"><h1>14.2 Hipótesis Especial: Hotel + Local</h1><p>Transformación a uso mixto hotelero-comercial</p></div>
+  <div class="grid grid-2" style="margin-bottom:14px;">
+    <div class="card">
+      <h3>Fase Transformación (3 años)</h3>
+      <ul>
+        <li>Hard Costs (obra): 4.019.436 €</li>
+        <li>Soft Costs + FF&amp;E + tasas incluidos</li>
+        <li>Inversión total: <b>5.376.367 €</b> (1.978 €/m²)</li>
+        <li>Tasa descuento real: 10%</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h3>Fase Explotación (10 años)</h3>
+      <ul>
+        <li><b>Hotel:</b> Ocup. 90% · ADR 250 € · GOP 47%</li>
+        <li>Tasa Hotel: 7,35% · Yield 4,50%</li>
+        <li><b>Local:</b> Renta 71 €/m²/mes · 25.667 €/mes</li>
+        <li>Tasa Local: 6,35% · Yield 4,25%</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid grid-3" style="margin-bottom:14px;">
+    <div class="kpi"><div class="label">Valor Hotel Terminado</div><div class="value" style="font-size:17px;">26.945.641 €</div></div>
+    <div class="kpi"><div class="label">Valor Local Terminado</div><div class="value" style="font-size:17px;">6.660.224 €</div></div>
+    <div class="kpi" style="background:#fff8e6;"><div class="label">GDV Total</div><div class="value" style="font-size:17px;color:var(--naranja);">33.605.865 €</div></div>
+  </div>
+  <div class="highlight">
+    <div style="font-size:13px;opacity:.85;letter-spacing:2px;">VALOR DE MERCADO BAJO HIPÓTESIS ESPECIAL</div>
+    <div class="v">21.006.000 €</div>
+    <div style="font-size:12px;opacity:.85;">GDV descontado al 10% (3 años) − VP CapEx</div>
+  </div>
+</section>
+
+<!-- 13 14.3 Apartamentos -->
+<section class="slide">
+  <div class="slide-header"><h1>14.3 Hipótesis Especial: Apartamentos + Local</h1><p>Mayor y Mejor Uso · Transformación a apartamentos turísticos + comercial</p></div>
+  <div class="grid grid-2" style="margin-bottom:14px;">
+    <div class="card">
+      <h3>Fase Transformación (2 años)</h3>
+      <ul>
+        <li>Hard Costs (obra): 2.644.764 €</li>
+        <li>Soft Costs + FF&amp;E + tasas incluidos</li>
+        <li>Inversión total: <b>3.515.783 €</b> (1.295 €/m²)</li>
+        <li>Tasa descuento real: 10%</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h3>Fase Explotación (10 años)</h3>
+      <ul>
+        <li><b>Apartamentos:</b> Ocup. 90% · ADR 233 € · GOP 68,1%</li>
+        <li>Tasa Apt: 7,80% · Yield 5,00%</li>
+        <li><b>Local:</b> Renta 66 €/m²/mes · 30.293 €/mes</li>
+        <li>Tasa Local: 6,35% · Yield 4,25%</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid grid-3" style="margin-bottom:14px;">
+    <div class="kpi"><div class="label">Valor Aptos. Terminado</div><div class="value" style="font-size:17px;">27.927.817 €</div></div>
+    <div class="kpi"><div class="label">Valor Local Terminado</div><div class="value" style="font-size:17px;">7.837.901 €</div></div>
+    <div class="kpi" style="background:#e8f0e0;"><div class="label">GDV Total</div><div class="value" style="font-size:17px;color:var(--verde);">35.765.718 €</div></div>
+  </div>
+  <div class="highlight green-bg">
+    <div style="font-size:13px;opacity:.85;letter-spacing:2px;">VALOR DE MERCADO – CONCLUSIÓN PRINCIPAL</div>
+    <div class="v">26.633.000 €</div>
+    <div style="font-size:12px;opacity:.85;">GDV descontado al 10% (2 años) − VP CapEx</div>
+  </div>
+</section>
+
+<!-- 14 Comparativa -->
+<section class="slide">
+  <div class="slide-header"><h1>Comparativa de Escenarios</h1><p>Análisis del Mayor y Mejor Uso</p></div>
+  <table>
+    <tr><th>Escenario</th><th>Hipótesis</th><th style="text-align:right;">Valor de Mercado</th><th style="text-align:right;">Δ vs Base</th></tr>
+    <tr><td><b>1. Uso Comercial Actual</b></td><td>Estado actual ("as is")</td><td style="text-align:right;">20.418.000 €</td><td style="text-align:right;color:var(--gris);">—</td></tr>
+    <tr><td><b>2. Hotel + Local Comercial</b></td><td>Hipótesis especial</td><td style="text-align:right;">21.006.000 €</td><td style="text-align:right;color:var(--naranja);">+588.000 € (+2,9%)</td></tr>
+    <tr class="hl"><td><b>3. Apartamentos + Local</b> <span class="badge">RECOMENDADO</span></td><td>Hipótesis especial</td><td style="text-align:right;font-weight:700;color:var(--verde);">26.633.000 €</td><td style="text-align:right;color:var(--verde);font-weight:700;">+6.215.000 € (+30,4%)</td></tr>
+  </table>
+  <div class="grid grid-3" style="margin-top:18px;">
+    <div class="card"><h3>Plazo Desarrollo</h3><ul><li>Comercial: N/A</li><li>Hotel: 3 años</li><li>Apartamentos: <b>2 años</b></li></ul></div>
+    <div class="card"><h3>CapEx Total</h3><ul><li>Comercial: 66.000 €</li><li>Hotel: 5.376.367 €</li><li>Apartamentos: <b>3.515.783 €</b></li></ul></div>
+    <div class="card green"><h3>Driver Principal</h3><ul><li>Comercial: Renta estabilizada</li><li>Hotel: ADR + ocupación</li><li>Apartamentos: <b>ADR + menor CapEx</b></li></ul></div>
+  </div>
+</section>
+
+<!-- 15 Sensibilidad -->
+<section class="slide">
+  <div class="slide-header"><h1>Análisis de Sensibilidad – Escenario Adoptado</h1><p>Apartamentos Turísticos + Local · ADR × Ocupación (Yield 5,00%)</p></div>
+  <table style="margin-bottom:14px;">
+    <tr><th>Occ ↓ / ADR →</th><th style="text-align:right;">250 €</th><th style="text-align:right;">264 €</th><th style="text-align:right;">278 €</th><th style="text-align:right;">292 €</th><th style="text-align:right;">306 €</th></tr>
+    <tr><td>80%</td><td style="text-align:right;">22.002.073 €</td><td style="text-align:right;">23.035.268 €</td><td style="text-align:right;">24.068.463 €</td><td style="text-align:right;">25.101.658 €</td><td style="text-align:right;">26.134.853 €</td></tr>
+    <tr><td>85%</td><td style="text-align:right;">23.155.192 €</td><td style="text-align:right;">24.252.962 €</td><td style="text-align:right;">25.350.732 €</td><td style="text-align:right;">26.448.502 €</td><td style="text-align:right;">27.546.271 €</td></tr>
+    <tr class="hl"><td><b>90%</b></td><td style="text-align:right;">24.308.312 €</td><td style="text-align:right;">25.470.656 €</td><td style="text-align:right;"><b>26.633.001 €</b></td><td style="text-align:right;">27.795.345 €</td><td style="text-align:right;">28.957.690 €</td></tr>
+    <tr><td>92%</td><td style="text-align:right;">24.769.560 €</td><td style="text-align:right;">25.957.734 €</td><td style="text-align:right;">27.145.908 €</td><td style="text-align:right;">28.334.083 €</td><td style="text-align:right;">29.522.257 €</td></tr>
+    <tr><td>95%</td><td style="text-align:right;">25.461.431 €</td><td style="text-align:right;">26.688.350 €</td><td style="text-align:right;">27.915.270 €</td><td style="text-align:right;">29.142.189 €</td><td style="text-align:right;">30.369.108 €</td></tr>
+  </table>
+  <div class="note">Rango de valor: <b>22,0 M€ – 30,4 M€</b>. El ADR y la ocupación son los drivers operativos principales. Escenarios moderadamente conservadores (ADR 264 € / Occ 85%) preservan valores claramente superiores al uso comercial actual (20,42 M€), reforzando el reposicionamiento como Mayor y Mejor Uso.</div>
+</section>
+
+<!-- 16 ESG -->
+<section class="slide">
+  <div class="slide-header"><h1>ESG, Incertidumbres y Limitaciones</h1></div>
+  <div class="grid grid-2">
+    <div class="card green">
+      <h3>Certificación BREEAM ✓</h3>
+      <ul>
+        <li>El activo dispone de certificación BREEAM</li>
+        <li>Elemento positivo desde perspectiva ESG</li>
+        <li>Refuerza atractivo para inversores y operadores</li>
+        <li>No se dispone de EPC</li>
+      </ul>
+    </div>
+    <div class="card orange">
+      <h3>Análisis de Incertidumbre</h3>
+      <ul>
+        <li>Nivel habitual para activos de esta naturaleza</li>
+        <li>Mayor incertidumbre en hipótesis especiales</li>
+        <li>Dependencia de licencias y mercado de explotación</li>
+        <li>Costes de transformación a definir en proyecto</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px;">
+    <h3>Limitación de Responsabilidad</h3>
+    <ul>
+      <li>Informe confidencial · Uso exclusivo del Cliente · Finalidad: posible venta</li>
+      <li>Conclusiones basadas en información disponible a la fecha de valoración</li>
+      <li>Sin responsabilidad frente a terceros · No constituye informe técnico ni de due diligence</li>
+      <li>Cumplimiento RICS Red Book (en vigor 31/01/2025) e IVS 2025</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 17 Conclusión -->
+<section class="slide">
+  <div class="slide-header"><h1>Conclusión de Valor</h1><p>Mayor y Mejor Uso del activo</p></div>
+  <div class="highlight green-bg" style="margin-bottom:25px;padding:35px;">
+    <div style="font-size:13px;opacity:.85;letter-spacing:2px;">VALOR DE MERCADO – 11 DE JUNIO DE 2026</div>
+    <div class="v" style="font-size:50px;">26.633.000 €</div>
+    <div style="font-size:14px;opacity:.9;font-weight:600;">VEINTISÉIS MILLONES SEISCIENTOS TREINTA Y TRES MIL EUROS</div>
+    <div style="margin-top:14px;font-size:12px;opacity:.85;">Bajo Hipótesis Especial: Apartamentos Turísticos + Local Comercial · Mayor y Mejor Uso del activo</div>
+  </div>
+  <div style="background:#fff;border-radius:10px;padding:30px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);">
+    <div style="font-size:13px;color:var(--gris);letter-spacing:2px;">FIRMA</div>
+    <div style="font-size:22px;color:var(--azul);font-weight:700;margin:10px 0;">Silvia Bermejo MRICS RV</div>
+    <div style="font-size:14px;color:var(--gris);">RICS Registered Valuer nº 33988665 · En nombre de G4 Asset Value</div>
+    <div style="margin-top:18px;font-size:13px;color:var(--gris);">Fecha de emisión: 24 de junio de 2026 · Nº Valoración: 2026/0346</div>
+  </div>
+</section>
+
+<div class="footer-nav">
+  <button class="btn" id="prev">← Anterior</button>
+  <div id="counter" style="font-size:13px;color:var(--gris);align-self:center;">1 / 18</div>
+  <button class="btn" id="next">Siguiente →</button>
+</div>
+
+</main>
+<script>
+  const slides=document.querySelectorAll('.slide');
+  const navItems=document.querySelectorAll('#nav li');
+  const counter=document.getElementById('counter');
+  let current=0;
+  function show(i){
+    if(i<0||i>=slides.length)return;
+    slides[current].classList.remove('active');
+    navItems[current].classList.remove('active');
+    current=i;
+    slides[current].classList.add('active');
+    navItems[current].classList.add('active');
+    counter.textContent=(current+1)+' / '+slides.length;
+    document.getElementById('prev').disabled=current===0;
+    document.getElementById('next').disabled=current===slides.length-1;
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  navItems.forEach(li=>li.addEventListener('click',()=>show(parseInt(li.dataset.i))));
+  document.getElementById('prev').addEventListener('click',()=>show(current-1));
+  document.getElementById('next').addEventListener('click',()=>show(current+1));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight')show(current+1);
+    if(e.key==='ArrowLeft')show(current-1);
+  });
+  show(0);
+</script>
+</body>
+</html>
