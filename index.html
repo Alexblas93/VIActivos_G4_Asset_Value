@@ -16,18 +16,35 @@
   body{background:var(--bg);color:#222;display:flex;min-height:100vh;}
   aside{
     width:240px;background:var(--azul);color:#fff;padding:25px 15px;
-    position:fixed;height:100vh;overflow-y:auto;
+    position:fixed;height:100vh;overflow-y:auto;z-index: 10;
   }
   aside .logos{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:25px;text-align:center;}
   aside .logo-text{color:#fff;font-size:17px;font-weight:700;letter-spacing:1px;}
   aside .logo-text small{display:block;font-size:9px;font-weight:400;opacity:.7;letter-spacing:2px;margin-top:3px;}
-  aside .logo-rics{background:#fff;color:var(--azul);padding:4px 12px;border-radius:6px;font-weight:bold;font-size:13px;letter-spacing:1px;}
+  
+  /* Estilos mejorados para el nuevo logo en imagen */
+  aside .logo-rics-img {
+    width: 100%;
+    max-width: 140px;
+    height: auto;
+    background: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: block;
+  }
+  
   aside h2{font-size:14px;text-transform:uppercase;margin:15px 0 8px;opacity:.7;letter-spacing:1px;}
   aside ul{list-style:none;}
   aside li{padding:9px 10px;border-radius:6px;cursor:pointer;font-size:13.5px;margin-bottom:3px;transition:.2s;border-left:3px solid transparent;}
   aside li:hover{background:rgba(255,255,255,.1);}
   aside li.active{background:rgba(255,255,255,.15);border-left:3px solid var(--naranja);font-weight:600;}
-  main{margin-left:240px;flex:1;padding:40px 50px;}
+  
+  main{
+    margin-left:240px;flex:1;padding:40px 50px 100px 50px;
+    position: relative;
+    min-height: 100vh;
+  }
   .slide{display:none;animation:fade .3s ease;}
   .slide.active{display:block;}
   @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
@@ -69,7 +86,16 @@
   .step.s2 h4{color:var(--verde);}
   .step.s3 h4{color:var(--naranja);}
   .step p{font-size:13px;color:var(--gris);}
-  .footer-nav{display:flex;justify-content:space-between;margin-top:35px;}
+  
+  .footer-nav{
+    display:flex;justify-content:space-between;
+    position: fixed; bottom: 0; right: 0; left: 240px;
+    background: rgba(244, 246, 250, 0.95);
+    padding: 15px 50px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+    backdrop-filter: blur(4px);
+    z-index: 5;
+  }
   .btn{background:var(--azul);color:#fff;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:14px;}
   .btn:hover{background:var(--azul2);}
   .btn:disabled{opacity:.4;cursor:not-allowed;}
@@ -85,7 +111,8 @@
 <aside>
   <div class="logos">
     <div class="logo-text">G4 ASSET VALUE<small>VALUATION &amp; CONSULTING</small></div>
-    <div class="logo-rics">◆ RICS</div>
+    <!-- Cambiado por el logo en imagen facilitado -->
+    <img class="logo-rics-img" src="https://erikasgrig.com/wp-content/uploads/2020/03/RICS-Logo-Black-With-Logo-White-Background.png" alt="Logo RICS">
   </div>
   <h2>Secciones</h2>
   <ul id="nav">
@@ -113,7 +140,7 @@
 
 <!-- 0 Portada -->
 <section class="slide active">
-  <div style="background:linear-gradient(135deg,var(--azul) 0%,var(--azul2) 100%);color:#fff;padding:80px 50px;border-radius:14px;text-align:center;">
+  <div style="background:linear-gradient(135deg,var(--azul) 0%,var(--azul2) 100%);color:#fff;padding:80px 50px;border-radius:14px;text-align:center;margin-top:20px;">
     <div style="font-size:14px;letter-spacing:3px;opacity:.85;">INFORME DE VALORACIÓN RICS</div>
     <h1 style="font-size:38px;margin:18px 0 10px;">Edificio Comercial<br>Calle Carretas 6 + Local Calle Paz 5</h1>
     <p style="font-size:18px;opacity:.9;">Madrid · España</p>
@@ -158,7 +185,7 @@
   <div class="card orange" style="margin-top:18px;">
     <h3>Principales Riesgos e Incertidumbres</h3>
     <ul>
-      <li>Viabilidad técnica, urbanística y administrativa de la transformación</li>
+      <li>Viabilidad técnica, urbanística y administrative de la transformación</li>
       <li>Obtención de licencias (protección patrimonial, ZBE Distrito Centro)</li>
       <li>Evolución de los mercados de explotación hotelero y turístico</li>
       <li>Estimación de los costes de reforma y reposicionamiento</li>
@@ -609,25 +636,34 @@
   const navItems=document.querySelectorAll('#nav li');
   const counter=document.getElementById('counter');
   let current=0;
+  
   function show(i){
     if(i<0||i>=slides.length)return;
+    
     slides[current].classList.remove('active');
     navItems[current].classList.remove('active');
+    
     current=i;
+    
     slides[current].classList.add('active');
     navItems[current].classList.add('active');
+    
     counter.textContent=(current+1)+' / '+slides.length;
     document.getElementById('prev').disabled=current===0;
     document.getElementById('next').disabled=current===slides.length-1;
-    window.scrollTo({top:0,behavior:'smooth'});
+    
+    window.scrollTo(0, 0);
   }
-  navItems.forEach(li=>li.addEventListener('click',()=>show(parseInt(li.dataset.i))));
+  
+  navItems.forEach(li=>li.addEventListener('click',()=>show(parseInt(li.getAttribute('data-i')))));
   document.getElementById('prev').addEventListener('click',()=>show(current-1));
   document.getElementById('next').addEventListener('click',()=>show(current+1));
+  
   document.addEventListener('keydown',e=>{
     if(e.key==='ArrowRight')show(current+1);
     if(e.key==='ArrowLeft')show(current-1);
   });
+  
   show(0);
 </script>
 </body>
